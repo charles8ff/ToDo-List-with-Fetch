@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Task from "./task.jsx";
 
-// addTask = textTask => {
-// 	receivedTask;
-// 	taskList.push(receivedTask);
-// };
+
 export function Home() {
 	const [textTask, setTextTask] = useState({ task: "" });
 	const [taskList, setTaskList] = useState([]);
