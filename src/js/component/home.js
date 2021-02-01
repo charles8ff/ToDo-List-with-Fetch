@@ -2,26 +2,23 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Task from "./task.jsx";
 
-let taskList = [];
-
 // addTask = textTask => {
 // 	receivedTask;
 // 	taskList.push(receivedTask);
 // };
 export function Home() {
-	const [textTask, setTextTask] = useState("");
-	const [arr, setArr] = useState([
-		{
-			task: ""
-		}
-	]);
+	const [textTask, setTextTask] = useState({ task: "" });
+	const [taskList, setTaskList] = useState([]);
+
 	const sendTextTask = e => {
 		e.preventDefault();
-		taskList.push(textTask);
-		console.log(taskList);
+		setTaskList([...taskList, textTask]);
+		setTextTask({ task: "" });
+		console.log(e);
 	};
-	let todoList = taskList.map((index, key) => (
-		<Task inputValue={index} key={key} />
+
+	let todoList = taskList.map((value, index) => (
+		<Task inputValue={value.task} key={index} />
 	));
 	// console.log(todoList);
 	return (
@@ -29,11 +26,12 @@ export function Home() {
 			<form className="form" onSubmit={sendTextTask}>
 				<input
 					type="text"
-					value={textTask}
-					onChange={e => setTextTask(e.target.value)}
+					value={textTask.task}
+					placeholder="What needs to be done?"
+					onChange={e => setTextTask({ task: e.target.value })}
 				/>
-				{todoList}
 			</form>
+			<ul>{todoList}</ul>
 		</div>
 	);
 }
