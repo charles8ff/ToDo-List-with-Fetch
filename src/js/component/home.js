@@ -8,29 +8,32 @@ export function Home() {
 	const [user, setUser] = useState("");
 	const [showModal, setShowModal] = useState(true);
 
-	useEffect(() => {
-		const requestOptions = {
-			method: "GET"
-		};
-		fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/" + user,
-			requestOptions
-		)
-			.then(response => {
-				if (!response.ok) {
-					console.log("he lanzado el error");
-					throw user;
-				}
-				console.log("no error, we proceed");
-				return response.json();
-			})
-			.then(responseAsJson => {
-				setTaskList(responseAsJson);
-			})
-			.catch(user => {
-				createUser(user);
-			});
-	}, []);
+	useEffect(
+		() => {
+			const requestOptions = {
+				method: "GET"
+			};
+			fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/" + user,
+				requestOptions
+			)
+				.then(response => {
+					if (!response.ok) {
+						console.log("he lanzado el error");
+						throw user;
+					}
+					console.log("no error, we proceed");
+					return response.json();
+				})
+				.then(responseAsJson => {
+					setTaskList(responseAsJson);
+				})
+				.catch(user => {
+					createUser(user);
+				});
+		},
+		[showModal]
+	);
 
 	const createUser = user => {
 		const requestOptions = {
@@ -46,14 +49,12 @@ export function Home() {
 
 	const sendTask = e => {
 		e.preventDefault();
-		setTaskList(taskList => [...taskList, task]);
-		console.log(task);
+		setTaskList(taskList => [...taskList, task]); //in our website
 	};
 
 	useEffect(
+		//this triggers after sendTask(), because it changes the variable taskLIst
 		() => {
-			console.log("ha cambiado");
-			console.log(taskList);
 			fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
 				method: "PUT",
 				body: JSON.stringify(taskList),
@@ -71,9 +72,10 @@ export function Home() {
 		[taskList]
 	);
 
-	const clickDelete = targetIndex => {
-		setTaskList(taskList.filter((_, index) => index !== targetIndex));
+	const clickDeleteTask = targetIndex => {
+		setTaskList(taskList.filter((_, index) => index !== targetIndex)); //in our website
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
+			//in the API
 			method: "PUT",
 			body: JSON.stringify(taskList),
 			headers: {
@@ -85,60 +87,70 @@ export function Home() {
 			.catch(error => console.error("Error:", error));
 	};
 
+	const clickDeleteUser = () => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/" + user, {
+			//in the API
+			method: "DELETE"
+		})
+			.then(res => res.json())
+			.then(response => console.log("Success:", JSON.stringify(response)))
+			.catch(error => console.error("Error:", error));
+
+		setUser("");
+		setShowModal(true);
+	};
+
+	const clickDoneTask = targetIndex => {
+		taskList[targetIndex].done = !taskList[targetIndex].done;
+		//this does not update the li's
+	};
 	let todoList = taskList.map((value, index) => (
 		<Task
 			inputValue={value.label}
 			key={index}
-			onMyClick={() => clickDelete(index)}
+			isDone={value.done}
+			onMyClickDone={() => clickDoneTask(index)}
+			onMyClickDelete={() => clickDeleteTask(index)}
 		/>
 	));
 
-	const handleUserKeyPress = e => {
-		if (e.key === "Enter" && !e.shiftKey) {
-			e.preventDefault();
-			console.log(e.target.value);
-			//handleSubmit(onSubmit); // this won't be triggered
-		}
-	};
 	return (
 		<>
 			<Modal show={showModal}>
-				<Modal.Header closeButton>
-					<Modal.Title>Modal title</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<form>
+				<form>
+					{/* the closeButton has to close*/}
+					<Modal.Header closeButton>
+						<Modal.Title>Modal title</Modal.Title>
+					</Modal.Header>
+					<Modal.Body>
 						<input
+							placeholder="Type your user"
+							type="text"
 							value={user}
-							onKeyPress={() => handleUserKeyPress()} //does not let to type
-							type="text"
+							onChange={e => {
+								setUser(e.target.value);
+							}}
 						/>
-						{/* <input
-							type="text"
-							placeholder="Write your message here..."
-							onKeyPress={handleUserKeyPress}
-						/> */}
-						{/* <input
-							type="text"
-							className="modalInput"
-							placeholder="what is your user?"
-						/> */}
-					</form>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button
-						variant="primary"
-						onClick={() => setShowModal(false)}>
-						Look for the user (and create it if it does not exist)
-					</Button>
-				</Modal.Footer>
+					</Modal.Body>
+					<Modal.Footer>
+						{/* format & align right*/}
+						<Button
+							variant="primary"
+							onClick={() => setShowModal(false)}>
+							Look for the user (and create it if it does not
+							exist)
+						</Button>
+					</Modal.Footer>
+				</form>
 			</Modal>
 			<Container className="mt-5">
 				<Row className="justify-content-md-center">
 					<Card className="App todolist" style={{ width: "45rem" }}>
 						<Card.Body>
 							<Card.Title>ToDo List</Card.Title>
-							<Button>Delete this user and all his tasks</Button>
+							<Button onClick={clickDeleteUser}>
+								Delete all tasks
+							</Button>
 							<form
 								className="form shadow-none"
 								onSubmit={sendTask}>
