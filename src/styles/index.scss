@@ -1,13 +1,52 @@
 @import "~bootstrap/scss/bootstrap.scss";
 
-/* 
+* {
+	margin:0;
+	padding:0;
+	box-sizing:border-box;
+}
+html, body {
+	background:#f7f1f1;
+	font-size:1.1rem;
+	font-family:'Quicksand', sans-serif;
+	height:100%;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.todolist {
+	margin:4rem auto;
+	padding:2rem 3rem 3rem;
+	max-width:500px;
+	background:#FF6666;
+	color:#FFF;
+	box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
+}
 
-*/
+.todolist ul {
+	margin-top:2.6rem;
+	list-style:none;
+}
+
+.todolist li {
+	display:flex;
+	margin:0 -3rem 4px;
+	padding:1.1rem 3rem;
+	justify-content:space-between;
+	align-items:center;
+	background:rgba(255,255,255,0.1);
+}
+
+input[type="text"]
+{
+    background: #ffffff24;
+    height: 2rem;
+    width: 100%;
+    color: #fff;
+    border: none;
+    padding-left: 0.4rem;
+}
+// input ::before{
+// margin-left: 0.1rem;
+// }
+input:focus{
+    outline: none;
+}

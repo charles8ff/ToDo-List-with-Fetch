@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-
+import ListGroupItem from "react-bootstrap";
 const Task = props => {
-	const [myTask, setMyTask] = useState({
-		text: "",
-		isDone: false,
-		id: -1
-	});
 
-	return <li>{props.inputValue}</li>;
+	return (
+		<li className="list-group-item">
+			{props.inputValue}
+			<i onClick={props.onMyClick} className="fas fa-trash-alt mr-4" />
+		</li>
+	);
 };
 Task.propTypes = {
 	inputValue: PropTypes.string,
