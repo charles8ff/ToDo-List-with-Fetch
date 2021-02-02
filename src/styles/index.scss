@@ -1,12 +1,22 @@
 @import "~bootstrap/scss/bootstrap.scss";
+// https://images.unsplash.com/photo-1514809606235-a56fe6d553b4?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80
+// https://images.unsplash.com/photo-1515787366009-7cbdd2dc587b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80
+// https://images.unsplash.com/photo-1510070112810-d4e9a46d9e91?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
 
 * {
 	margin:0;
 	padding:0;
-	box-sizing:border-box;
+    box-sizing:border-box;
+    font-family: 'Sriracha', cursive;
 }
-html, body {
-	background:#f7f1f1;
+body{
+    background-image: url(https://images.unsplash.com/photo-1510070009289-b5bc34383727?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+html, body {  
 	font-size:1.1rem;
 	font-family:'Quicksand', sans-serif;
 	height:100%;
@@ -16,9 +26,10 @@ html, body {
 	margin:4rem auto;
 	padding:2rem 3rem 3rem;
 	max-width:500px;
-	background:#FF6666;
+	background:#054776;
 	color:#FFF;
-	box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
+    // box-shadow:-20px -20px 0px 0px rgba(100,100,100,.1);
+    box-shadow: 5px 5px #043B62, 10px 10px #032F4E, 15px 15px #02233B;
 }
 
 .todolist ul {
@@ -44,9 +55,26 @@ html, body {
     border: none;
     padding-left: 0.4rem;
 }
-// input ::before{
-// margin-left: 0.1rem;
-// }
 input:focus{
     outline: none;
+}
+.card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+form.form.shadow-none{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formButton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.modal-content{
+    height: 30rem;
+    width: 30rem;
 }

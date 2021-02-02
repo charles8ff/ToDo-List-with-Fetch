@@ -135,7 +135,7 @@ export function Home() {
 					<Modal.Footer>
 						{/* format & align right*/}
 						<Button
-							variant="primary"
+							variant="dark"
 							onClick={() => setShowModal(false)}>
 							Look for the user (and create it if it does not
 							exist)
@@ -147,10 +147,7 @@ export function Home() {
 				<Row className="justify-content-md-center">
 					<Card className="App todolist" style={{ width: "45rem" }}>
 						<Card.Body>
-							<Card.Title>ToDo List</Card.Title>
-							<Button onClick={clickDeleteUser}>
-								Delete all tasks
-							</Button>
+							<Card.Title>THINGS TO DO LIST</Card.Title>
 							<form
 								className="form shadow-none"
 								onSubmit={sendTask}>
@@ -166,6 +163,9 @@ export function Home() {
 									}
 								/>
 							</form>
+							<Button onClick={clickDeleteUser}>
+								Delete all tasks
+							</Button>
 						</Card.Body>
 						<ul className="list-group-flush">{todoList}</ul>
 						<Card.Body>
