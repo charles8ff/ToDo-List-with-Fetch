@@ -15,7 +15,7 @@ const UserModal = props => {
 	return (
 		<Modal show={showModal}>
 			<Modal.Header closeButton>
-				<Modal.Title>Modal title</Modal.Title>
+				<Modal.Title>User Search</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<form onSubmit={}>

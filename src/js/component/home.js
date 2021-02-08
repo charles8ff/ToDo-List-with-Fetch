@@ -119,13 +119,14 @@ export function Home() {
 			<Modal show={showModal}>
 				<form>
 					{/* the closeButton has to close*/}
-					<Modal.Header closeButton>
-						<Modal.Title>Modal title</Modal.Title>
+					<Modal.Header>
+						<Modal.Title>User Search</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<input
 							placeholder="Type your user"
 							type="text"
+							className="inputSize"
 							value={user}
 							onChange={e => {
 								setUser(e.target.value);
@@ -154,6 +155,7 @@ export function Home() {
 								<input
 									type="text"
 									value={task.label}
+									className="inputSize"
 									placeholder="What needs to be done?"
 									onChange={e =>
 										setTask({
@@ -163,9 +165,11 @@ export function Home() {
 									}
 								/>
 							</form>
-							<Button onClick={clickDeleteUser}>
-								Delete all tasks
-							</Button>
+							<Row className="d-flex flex-row justify-content-center mt-3">
+								<Button onClick={clickDeleteUser}>
+									Search user
+								</Button>
+							</Row>
 						</Card.Body>
 						<ul className="list-group-flush">{todoList}</ul>
 						<Card.Body>

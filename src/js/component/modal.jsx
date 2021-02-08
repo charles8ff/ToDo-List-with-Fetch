@@ -2,7 +2,7 @@ import {Modal, ModalDialog, ModalHeader, ModalBody, ModalFooter} from 'react-boo
 
 <Modal.Dialog>
   <Modal.Header closeButton>
-    <Modal.Title>Modal title</Modal.Title>
+    <Modal.Title>User Search</Modal.Title>
   </Modal.Header>
 
   <Modal.Body>
